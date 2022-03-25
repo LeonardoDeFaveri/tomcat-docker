@@ -1,0 +1,53 @@
+;;; package --- summary
+(package-initialize)
+
+(require 'package)
+(add-to-list 'package-archives
+             '("MELPA Stable" . "https://stable.melpa.org/packages/") t)
+(package-initialize)
+
+;;;Commentary:                                                                                                                                                                                                                             
+                                                                                                                        
+;;; Code:
+
+(package-install gnu-elpa-keyring-update) 
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
+ '(cua-mode t nil (cua-base))
+ '(custom-enabled-themes (quote (wheatgrass)))
+ '(package-selected-packages (quote (gnu-elpa-keyring-update))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;; Custom key bindings
+(global-set-key (kbd "M-m") 'menu-bar-open)
+(global-set-key (kbd "<C-tab>") 'other-window)
+(global-set-key (kbd "C-^") 'eshell)
+
+(setq inhibit-startup-screen t)
+(global-display-line-numbers-mode)
+
+;; Custom functions
+;; Closes all buffer except the current
+(defun only-current-buffer () 
+  (interactive)
+  (let ((tobe-killed (cdr (buffer-list (current-buffer)))))
+    (while tobe-killed
+      (kill-buffer (car tobe-killed))
+      (setq tobe-killed (cdr tobe-killed)))))
