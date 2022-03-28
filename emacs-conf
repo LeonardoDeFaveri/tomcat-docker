@@ -9,8 +9,10 @@
 ;;;Commentary:                                                                                                                                                                                                                             
                                                                                                                         
 ;;; Code:
-
+; Remove after installation to remove error
 (package-install gnu-elpa-keyring-update) 
+(package-install use-package) 
+;; Remove the two lines above after first execution
 
 (use-package flycheck
   :ensure t
