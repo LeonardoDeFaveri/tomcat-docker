@@ -21,6 +21,9 @@ ENV CATALINA_BASE=/opt/tomcat/latest
 ENV CATALINA_PID=/opt/tomcat/latest/temp/tomcat.pid
 ENV CATALINA_OPTS="-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
 
+# Installs maven
+RUN apt install maven -y
+
 # Installs and configure emacs for root user
 RUN apt install emacs -y
 ADD emacs-conf /root/.emacs
@@ -53,9 +56,6 @@ RUN chmod -R 755 /data
 # Links /data folder into root and remote home folders
 RUN ln -s /data /root/data
 RUN ln -s /data /home/remote/data
-
-# Makes root user bash to open on home folder
-
 
 EXPOSE 8080 22
 
