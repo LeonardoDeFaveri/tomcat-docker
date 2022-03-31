@@ -48,6 +48,23 @@ RUN groupadd code
 RUN usermod -a -G code root
 RUN usermod -a -G code remote
 
+# Allows access to webapps folder to remote user
+RUN chown -R root:code /opt/tomcat/latest/webapps/
+RUN chmod -R 775 /opt/tomcat/latest/webapps/
+
+# Restore default privileges for tomcat management webapps
+RUN chown -R /opt/tomcat/latest/webapps/ROOT
+RUN chown -R /opt/tomcat/latest/webapps/host-manager
+RUN chown -R /opt/tomcat/latest/webapps/manager
+RUN chown -R /opt/tomcat/latest/webapps/docs
+RUN chown -R /opt/tomcat/latest/webapps/examples
+
+RUN chmod -R 770 /opt/tomcat/latest/webapps/ROOT
+RUN chmod -R 775 /opt/tomcat/latest/webapps/host-manager
+RUN chmod -R 775 /opt/tomcat/latest/webapps/manager
+RUN chmod -R 775 /opt/tomcat/latest/webapps/docs
+RUN chmod -R 775 /opt/tomcat/latest/webapps/examples
+
 # Creates the folder in which every webapps should be placed
 RUN mkdir /data
 RUN chown -R root:code /data 
