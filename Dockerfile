@@ -50,9 +50,6 @@ RUN usermod -a -G code remote
 
 # Allows access to webapps folder to remote user
 RUN chown -R root:code /opt/tomcat/latest/webapps/
-RUN chown -R root:code /opt/tomcat/latest/bin
-RUN chown -R root:code /opt/tomcat/latest/lib
-RUN chown -R root:code /opt/tomcat/latest/conf
 RUN chmod -R 775 /opt/tomcat/latest/webapps/
 
 # Restore default privileges for tomcat management webapps
@@ -77,8 +74,7 @@ RUN chmod -R 755 /data
 RUN ln -s /data /root/data
 RUN ln -s /data /home/remote/data
 
-# 33121 is necessary if you want to use the intellij debugger
-EXPOSE 8080 22 33121
+EXPOSE 8080 22
 
 # Adds init script
 ADD init.sh /root/.init.sh
